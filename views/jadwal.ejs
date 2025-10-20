@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jadwal Kelas</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .back-button { display: block; margin-bottom: 20px; }
+        .day { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .class-item { background: white; padding: 10px; margin: 5px 0; border-left: 4px solid #4CAF50; }
+    </style>
+</head>
+<body>
+    <a href="/menu" class="back-button">⬅ Kembali ke Menu</a>
+    <h1>🗓️ Jadwal Kelas</h1>
+
+    <% if (!jadwal || jadwal.length === 0) { %>
+        <p>Data jadwal belum tersedia atau sedang dalam perbaikan.</p>
+        <p>Silakan hubungi administrator.</p>
+    <% } else { %>
+        <% const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu']; %>
+        
+        <% days.forEach(day => { %>
+            <% const dayClasses = jadwal.filter(item => item.hari === day); %>
+            
+            <div class="day">
+                <h2><%= day %></h2>
+                
+                <% if (dayClasses.length > 0) { %>
+                    <% dayClasses.forEach(kelas => { %>
+                        <div class="class-item">
+                            <strong><%= kelas.matkul %></strong><br>
+                            Waktu: <%= kelas.waktu %><br>
+                            Ruang: <%= kelas.ruang %><br>
+                            Dosen: <%= kelas.dosen %>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>Tidak ada kelas</p>
+                <% } %>
+            </div>
+        <% }) %>
+    <% } %>
+</body>
+</html>

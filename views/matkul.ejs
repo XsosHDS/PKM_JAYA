@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>📘 Jadwal Kuliah & Dosen</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: 100px repeat(7, 1fr);
+      border: 1px solid #ccc;
+    }
+    .calendar div {
+      border: 1px solid #ccc;
+      padding: 5px;
+      min-height: 60px;
+      font-size: 12px;
+    }
+    .header {
+      background: #4CAF50;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+    }
+    .time {
+      background: #f0f0f0;
+      text-align: center;
+      font-weight: bold;
+    }
+    .event {
+      background: #d9fdd3;
+      border-radius: 5px;
+      margin: 2px;
+      padding: 3px;
+    }
+    .event strong {
+      display: block;
+      font-size: 13px;
+      color: #333;
+    }
+    a {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <a href="/menu">⬅ Kembali ke Menu</a>
+  <h2>📘 Jadwal Mata Kuliah & Dosen</h2>
+
+  <div class="calendar">
+    <!-- Header -->
+    <div class="header">Waktu</div>
+    <div class="header">Senin</div>
+    <div class="header">Selasa</div>
+    <div class="header">Rabu</div>
+    <div class="header">Kamis</div>
+    <div class="header">Jumat</div>
+    <div class="header">Sabtu</div>
+    <div class="header">Minggu</div>
+
+    <!-- Jam -->
+    <% const jam = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"]; %>
+    <% jam.forEach(function(j) { %>
+      <div class="time"><%= j %></div>
+      <% ["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu","Minggu"].forEach(function(hari) { %>
+        <div>
+          <% jadwal.forEach(function(item) { 
+               if(item.hari === hari && item.waktu.includes(j)) { %>
+            <div class="event">
+              <strong><%= item.matkul %></strong>
+              <span><%= item.jenis %></span><br>
+              <span><%= item.waktu %></span><br>
+              <span>Ruang: <%= item.ruang %></span><br>
+              <span>Dosen: <%= item.dosen %></span>
+            </div>
+          <% } }) %>
+        </div>
+      <% }) %>
+    <% }) %>
+  </div>
+</body>
+</html>
